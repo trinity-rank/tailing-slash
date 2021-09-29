@@ -16,7 +16,7 @@ composer require trinity-rank/tailing-slash
 
 ### Step 2: Service Provider
 
-After installing the package, register [Trinityrank\TailingSlash\TailingSlashServiceProvider] in your [config/app.php].
+After installing the package, register `Trinityrank\TailingSlash\TailingSlashServiceProvider` in your `config/app.php`.
 
 ```php
 'providers' => [
@@ -31,13 +31,13 @@ After installing the package, register [Trinityrank\TailingSlash\TailingSlashSer
 
 ### Step 3: Routes
 ```php
-    Route::get('/', function () {
-        return view('welcome');
-    });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-    Route::get('about-us/', function () {
-        return view('about');
-    });
+Route::get('about-us/', function () {
+    return view('about');
+});
 ```
 
 ### Usage
@@ -45,21 +45,21 @@ After installing the package, register [Trinityrank\TailingSlash\TailingSlashSer
 Whenever you use some Laravel redirect function, tailing slash ("/") will be applied to the end of url.
 
 ```php
-    return redirect('about/');
+return redirect('about/');
 
-    return back()->withInput();
+return back()->withInput();
 
-    return redirect()->route('text', ['id' => 1]);
+return redirect()->route('post', ['id' => 1]);
 
-    return redirect()->action('IndexController@about');
+return redirect()->action('IndexController@about');
 ```
 ### Notice
 
-There is a problem with overriding Laravel [Paginator] and [LengthAwarePaginator] classes. So, every time you use [paginate()] method on your models, query builders etc., you must set current path for pagination links. Example:
+There is a problem with overriding Laravel `Paginator` and `LengthAwarePaginator` classes. So, every time you use `paginate()` method on your models, query builders etc., you must set current path for pagination links. Example:
 
 ```php
-    $posts = Text::where('is_active', 1)->paginate();
-    $posts->setPath(URL::current());
+$posts = Text::where('is_active', 1)->paginate();
+$posts->setPath(URL::current());
 
-    $posts->links();
+$posts->links();
 ```
