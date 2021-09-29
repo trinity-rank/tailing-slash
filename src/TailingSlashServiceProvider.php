@@ -19,7 +19,7 @@ class TailingSlashServiceProvider extends ServiceProvider
 
             $app->instance('routes', $routes);
 
-            $url = new UrlGenerator(
+            $url = new TailingSlash(
                 $routes,
                 $app->rebinding(
                     'request',
