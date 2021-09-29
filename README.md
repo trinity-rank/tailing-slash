@@ -16,7 +16,7 @@ composer require trinityrank/tailing-slash
 
 ### Step 2: Service Provider
 
-After installing the package, register `Trinityrank\TailingSlash\TailingSlashServiceProvider` in your `config/app.php`.
+After installing the package, register `Trinityrank\TailingSlash\RoutingServiceProvider` in your `config/app.php`.
 
 ```php
 'providers' => [
@@ -24,7 +24,7 @@ After installing the package, register `Trinityrank\TailingSlash\TailingSlashSer
     // ...
 
     // Other Service Providers...
-    Trinityrank\TailingSlash\TailingSlashServiceProvider::class
+    Trinityrank\TailingSlash\RoutingServiceProvider::class
     // ...
 ],
 ```

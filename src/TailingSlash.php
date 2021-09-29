@@ -2,10 +2,10 @@
 
 namespace Trinityrank\TailingSlash;
 
-use Illuminate\Routing\UrlGenerator;
+use Illuminate\Routing\UrlGenerator as BaseUrlGenerator;
 use Illuminate\Support\Str;
 
-class TailingSlash extends UrlGenerator
+class UrlGenerator extends BaseUrlGenerator
 {
     protected $except = [
         'livewire/upload-file',

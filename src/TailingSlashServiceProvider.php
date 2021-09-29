@@ -2,9 +2,9 @@
 
 namespace Trinityrank\TailingSlash;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\RoutingServiceProvider as BaseRoutingServiceProvider;
 
-class TailingSlashServiceProvider extends ServiceProvider
+class RoutingServiceProvider extends BaseRoutingServiceProvider
 {
 
     public function register()
@@ -19,7 +19,7 @@ class TailingSlashServiceProvider extends ServiceProvider
 
             $app->instance('routes', $routes);
 
-            $url = new TailingSlash(
+            $url = new UrlGenerator(
                 $routes,
                 $app->rebinding(
                     'request',
