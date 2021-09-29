@@ -11,7 +11,7 @@ Adds URL formatting and redirection with trailing slash to Laravel framework.
 To get started with Laravel Trailing Slash, use Composer command to add the package to your composer.json project's dependencies:
 
 ```bash
-composer require trinity-rank/tailing-slash
+composer require trinityrank/tailing-slash
 ```
 
 ### Step 2: Service Provider
