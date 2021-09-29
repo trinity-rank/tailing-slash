@@ -1,52 +1,65 @@
 # Very short description of the package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/trinityrank/tailing-slash.svg?style=flat-square)](https://packagist.org/packages/trinityrank/tailing-slash)
-[![Total Downloads](https://img.shields.io/packagist/dt/trinityrank/tailing-slash.svg?style=flat-square)](https://packagist.org/packages/trinityrank/tailing-slash)
-![GitHub Actions](https://github.com/trinityrank/tailing-slash/actions/workflows/main.yml/badge.svg)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/trinity-rank/tailing-slash.svg?style=flat-square)](https://packagist.org/packages/trinityrank/tailing-slash)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Adds URL formatting and redirection with trailing slash to Laravel framework.
 
 ## Installation
 
-You can install the package via composera:
+### Step 1: Install package
+
+To get started with Laravel Trailing Slash, use Composer command to add the package to your composer.json project's dependencies:
 
 ```bash
-composer require trinityrank/tailing-slash
+composer require trinity-rank/tailing-slash
 ```
 
-## Usage
+### Step 2: Service Provider
+
+After installing the package, register [Trinityrank\TailingSlash\TailingSlashServiceProvider] in your [config/app.php].
 
 ```php
-// Usage description here
+'providers' => [
+    // Aplication Service Providers...
+    // ...
+
+    // Other Service Providers...
+    Trinityrank\TailingSlash\TailingSlashServiceProvider::class
+    // ...
+],
 ```
 
-### Testing
+### Step 3: Routes
+```php
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-```bash
-composer test
+    Route::get('about-us/', function () {
+        return view('about');
+    });
 ```
 
-### Changelog
+### Usage
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Whenever you use some Laravel redirect function, tailing slash ("/") will be applied to the end of url.
 
-## Contributing
+```php
+    return redirect('about/');
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+    return back()->withInput();
 
-### Security
+    return redirect()->route('text', ['id' => 1]);
 
-If you discover any security related issues, please email nemanja@trinityrank.com instead of using the issue tracker.
+    return redirect()->action('IndexController@about');
+```
+### Notice
 
-## Credits
+There is a problem with overriding Laravel [Paginator] and [LengthAwarePaginator] classes. So, every time you use [paginate()] method on your models, query builders etc., you must set current path for pagination links. Example:
 
--   [TrinityRank Dev Team](https://github.com/trinityrank)
--   [All Contributors](../../contributors)
+```php
+    $posts = Text::where('is_active', 1)->paginate();
+    $posts->setPath(URL::current());
 
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
+    $posts->links();
+```
