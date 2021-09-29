@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Trinityrank\\TailingSlash\\TailingSlashServiceProvider"
+                "Trinityrank\\TailingSlash\\RoutingServiceProvider"
             ],
             "aliases": {
-                "TailingSlash": "Trinityrank\\TailingSlash\\TailingSlash"
+                "TailingSlash": "Trinityrank\\TailingSlash\\UrlGenerator"
             }
         }
     }
