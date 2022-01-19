@@ -27,4 +27,19 @@ class UrlGenerator extends BaseUrlGenerator
         ? parent::format($root, $path, $route)
         : parent::format($root, $path, $route) . (Str::contains($path, '#') ? '' : '/');
     }
+
+    public static function tailingSlash($url)
+    {
+        // Find query string start character
+        if( !Str::contains($url, "/?") ) {
+            $url = Str::replace("?", "/?", $url);
+        }
+        // Find anchor tag
+        if( !Str::contains($url, "/#") ) {
+            $url = Str::replace("#", "/#", $url);
+        }
+        return $url;
+    }
+
+
 }
