@@ -51,6 +51,12 @@ class UrlGenerator extends BaseUrlGenerator
             // Fix laravel default pagination with questionmark
             $url = preg_replace("~\?([A-Za-z]+)=~", "/$1/", $url);
         }
+
+        // For page 1 do not use page paramether
+        if( preg_match("~\/([A-Za-z]+)\/1~", $url) ) {
+            $url = preg_replace("~\/([A-Za-z]+)\/1~", "/", $url);
+        }
+
         return trim($url, "/") ."/";
     }
 
