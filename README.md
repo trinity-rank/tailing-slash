@@ -70,10 +70,10 @@ There is a problem with overriding Laravel `Paginator` and `LengthAwarePaginator
 ```
 
 ## Pagiantion
-- Use this method to format pagination links on your blade component (tailwind.blade.php)
+- Use this method to format pagination links on your blade component (tailwind.blade.php) and also use this for canonical links (check your `cleanCanonicalURL` in `BaseController`)
 
 ```php
-    UrlGenerator::paginationLinks($element[1])
+    UrlGenerator::paginationLinks($url)
 ```
 
 - On your 'web.php' add page route for pagination. Use same `controller` and same `method` as you will use for normal archive page (just `path` is changed)
