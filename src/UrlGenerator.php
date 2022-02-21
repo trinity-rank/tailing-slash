@@ -42,5 +42,27 @@ class UrlGenerator extends BaseUrlGenerator
         return $url;
     }
 
+    public static function paginationLinks($url)
+    {
+        // Find query string start character
+        if( preg_match("~\?([A-Za-z]+)=~", $url) ) {
+            // Remove old pagination param (with slashes)
+            $url = preg_replace("~\/[A-Za-z]+\/\d+~", "", $url);
+            // Fix laravel default pagination with questionmark
+            $url = preg_replace("~\?([A-Za-z]+)=~", "/$1/", $url);
+        }
+        return trim($url, "/") ."/";
+    }
+
+    public static function paginationCheck($pageNumber, $pageType = "page")
+    {
+        if( $pageNumber !== null ) {
+            $pageNumber = (int) $pageNumber;
+            if( $pageNumber === 0 ) {
+                abort(404);
+            }
+            return request()->request->add([$pageType => $pageNumber]);
+        }
+    }
 
 }
