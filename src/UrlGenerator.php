@@ -44,6 +44,10 @@ class UrlGenerator extends BaseUrlGenerator
 
     public static function paginationLinks($url)
     {
+        if( $url == null ) {
+            return $url;
+        }
+
         // Find query string start character
         if( preg_match("~\?([A-Za-z]+)=~", $url) ) {
             // Remove old pagination param (with slashes)
