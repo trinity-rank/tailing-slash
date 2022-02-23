@@ -17,7 +17,8 @@ class UrlGenerator extends BaseUrlGenerator
         'sitemap/review_sitemap.xml',
         'sitemap/product_sitemap.xml',
         'sitemap/page_sitemap.xml',
-        'sitemap/author_sitemap.xml'
+        'sitemap/author_sitemap.xml',
+        'sitemap/deals_sitemap.xml'
     ];
 
     public function format($root, $path, $route = null)
