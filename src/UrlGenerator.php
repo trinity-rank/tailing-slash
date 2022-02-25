@@ -94,6 +94,7 @@ class UrlGenerator extends BaseUrlGenerator
                 return $pageNumber;
             }
         }
+        return $lang;
     }
 
 }
