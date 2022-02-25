@@ -85,4 +85,15 @@ class UrlGenerator extends BaseUrlGenerator
         }
     }
 
+
+    public static function language($pageNumber = null, $lang = null)
+    {
+        $locales = config('app.locales');
+        if( $locales && $lang == null) {
+            if( in_array($pageNumber, $locales) ) {
+                return $pageNumber;
+            }
+        }
+    }
+
 }
