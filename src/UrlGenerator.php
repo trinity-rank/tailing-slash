@@ -67,6 +67,15 @@ class UrlGenerator extends BaseUrlGenerator
 
     public static function paginationCheck($pageNumber, $pageType = "page")
     {
+        // For MultiLanguage websites
+        $locales = config('app.locales');
+        if( $locales ) {
+            if( in_array($pageNumber, $locales) ) {
+                return true;
+            }
+        }
+        
+        // Custom pagination
         if( $pageNumber !== null ) {
             $pageNumber = (int) $pageNumber;
             if( $pageNumber === 0 ) {
