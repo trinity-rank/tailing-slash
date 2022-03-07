@@ -49,6 +49,17 @@ class UrlGenerator extends BaseUrlGenerator
             return $url;
         }
 
+        $endingSlash = "/";
+
+        // For search pagination
+        if( preg_match("~\?q=~", $url) ) {
+            $endingSlash = "";
+            // Remove old pagination param (with slashes)
+            $url = preg_replace("~\/page\/\d+\?~", "?", $url);
+            // Fix laravel default pagination with questionmark
+            $url = preg_replace("~\?q=(.*)&page=(.*)~", "/page/$2/?q=$1", $url);
+        }
+        
         // Find query string start character
         if( preg_match("~\?page=~", $url) ) {
             // Remove old pagination param (with slashes)
@@ -62,7 +73,7 @@ class UrlGenerator extends BaseUrlGenerator
             $url = preg_replace("~/page/1$~", "/", $url);
         }
 
-        return trim($url, "/") ."/";
+        return trim($url, "/") . $endingSlash;
     }
 
     public static function paginationCheck($pageNumber, $pageType = "page")
