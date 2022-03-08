@@ -68,12 +68,14 @@ class UrlGenerator extends BaseUrlGenerator
             $url = preg_replace("~\?(page)=~", "/$1/", $url);
         }
 
+        $url = trim($url, "/") . $endingSlash;
+
         // For page 1 do not use page paramether
-        if( preg_match("~/page/1$~", $url) ) {
-            $url = preg_replace("~/page/1$~", "/", $url);
+        if( preg_match("~\/page\/[1]{1}\/~", $url) ) {
+            $url = preg_replace("~\/page\/[1]{1}\/~", "/", $url);
         }
 
-        return trim($url, "/") . $endingSlash;
+        return $url;
     }
 
     public static function paginationCheck($pageNumber, $pageType = "page")
