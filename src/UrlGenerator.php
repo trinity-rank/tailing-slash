@@ -23,7 +23,7 @@ class UrlGenerator extends BaseUrlGenerator
 
     public function format($root, $path, $route = null)
     {
-        return collect($this->except)->contains(function($element) use ($path) {
+        return collect($this->except)->contains(function ($element) use ($path) {
             return Str::contains($path, $element);
         })
         ? parent::format($root, $path, $route)
@@ -33,11 +33,11 @@ class UrlGenerator extends BaseUrlGenerator
     public static function tailingSlash($url)
     {
         // Find query string start character
-        if( !Str::contains($url, "/?") ) {
+        if (!Str::contains($url, "/?")) {
             $url = Str::replace("?", "/?", $url);
         }
         // Find anchor tag
-        if( !Str::contains($url, "/#") ) {
+        if (!Str::contains($url, "/#")) {
             $url = Str::replace("#", "/#", $url);
         }
         return $url;
@@ -45,23 +45,23 @@ class UrlGenerator extends BaseUrlGenerator
 
     public static function paginationLinks($url)
     {
-        if( $url == null ) {
+        if ($url == null) {
             return $url;
         }
 
         $endingSlash = "/";
 
         // For search pagination
-        if( preg_match("~\?q=~", $url) ) {
+        if (preg_match("~\?q=~", $url)) {
             $endingSlash = "";
             // Remove old pagination param (with slashes)
             $url = preg_replace("~\/page\/\d+\?~", "?", $url);
             // Fix laravel default pagination with questionmark
             $url = preg_replace("~\?q=(.*)&page=(.*)~", "/page/$2/?q=$1", $url);
         }
-        
+
         // Find query string start character
-        if( preg_match("~\?page=~", $url) ) {
+        if (preg_match("~\?page=~", $url)) {
             // Remove old pagination param (with slashes)
             $url = preg_replace("~\/page\/\d+\?~", "?", $url);
             // Fix laravel default pagination with questionmark
@@ -71,7 +71,7 @@ class UrlGenerator extends BaseUrlGenerator
         $url = trim($url, "/") . $endingSlash;
 
         // For page 1 do not use page paramether
-        if( preg_match("~\/page\/[1]{1}\/~", $url) ) {
+        if (preg_match("~\/page\/[1]{1}\/~", $url)) {
             $url = preg_replace("~\/page\/[1]{1}\/~", "/", $url);
         }
 
@@ -82,16 +82,16 @@ class UrlGenerator extends BaseUrlGenerator
     {
         // For MultiLanguage websites
         $locales = config('app.locales');
-        if( $locales ) {
-            if( in_array($pageNumber, $locales) ) {
+        if ($locales) {
+            if (in_array($pageNumber, $locales)) {
                 return true;
             }
         }
-        
+
         // Custom pagination
-        if( $pageNumber !== null ) {
+        if ($pageNumber !== null) {
             $pageNumber = (int) $pageNumber;
-            if( $pageNumber === 0 ) {
+            if ($pageNumber === 0) {
                 abort(404);
             }
             return request()->request->add([$pageType => $pageNumber]);
@@ -102,12 +102,11 @@ class UrlGenerator extends BaseUrlGenerator
     public static function language($pageNumber = null, $lang = null)
     {
         $locales = config('app.locales');
-        if( $locales && $lang == null) {
-            if( in_array($pageNumber, $locales) ) {
+        if ($locales && $lang == null) {
+            if (in_array($pageNumber, $locales)) {
                 return $pageNumber;
             }
         }
         return $lang;
     }
-
 }
