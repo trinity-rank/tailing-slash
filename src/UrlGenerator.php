@@ -109,4 +109,16 @@ class UrlGenerator extends BaseUrlGenerator
         }
         return $lang;
     }
+
+    public static function canonical($url = null)
+    {
+        $url = self::paginationLinks($url);
+
+        // Remove pagination in canonical for author archive
+        if (preg_match('~\/author\/~', $url)) {
+            $url = preg_replace("~\/page\/\d+\/~", '/', $url);
+        }
+
+        return $url;
+    }
 }
